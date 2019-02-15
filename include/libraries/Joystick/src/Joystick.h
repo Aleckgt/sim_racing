@@ -23,16 +23,6 @@
 
 #include <DynamicHID/DynamicHID.h>
 
-#if ARDUINO < 10606
-#error The Joystick library requires Arduino IDE 1.6.6 or greater. Please update your IDE.
-#endif // ARDUINO < 10606
-
-#if ARDUINO > 10606
-#if !defined(USBCON)
-#error The Joystick library can only be used with a USB MCU (e.g. Arduino Leonardo, Arduino Micro, etc.).
-#endif // !defined(USBCON)
-#endif // ARDUINO > 10606
-
 #if !defined(_USING_DYNAMIC_HID)
 
 #warning "Using legacy HID core (non pluggable)"
@@ -75,7 +65,7 @@ private:
     uint8_t                 *_buttonValues = NULL;
 
     // Joystick Settings
-    bool                     _autoSendState;
+    bool                     _autoSendState = false;
     uint8_t                  _buttonCount;
     uint8_t                  _buttonValuesArraySize = 0;
 	uint8_t					 _hatSwitchCount;

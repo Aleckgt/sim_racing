@@ -46,8 +46,6 @@ const u16 STRING_LANGUAGE[2] = {
 #define USB_PRODUCT     "USB IO Board"
 #endif
 
-const u8 STRING_PRODUCT[] PROGMEM = USB_PRODUCT;
-
 #if USB_VID == 0x2341
 #  if defined(USB_MANUFACTURER)
 #    undef USB_MANUFACTURER
@@ -58,11 +56,33 @@ const u8 STRING_PRODUCT[] PROGMEM = USB_PRODUCT;
 #    undef USB_MANUFACTURER
 #  endif
 #  define USB_MANUFACTURER "SparkFun"
+#elif USB_VID == 0x9999
+#  undef USB_PRODUCT
+#  if defined(USB_MANUFACTURER)
+#    undef USB_MANUFACTURER
+#  endif
+#  define USB_MANUFACTURER "Aleck"
+#  define USB_PRODUCT "Wheel"
+#elif USB_VID == 0x9998
+#  undef USB_PRODUCT
+#  if defined(USB_MANUFACTURER)
+#    undef USB_MANUFACTURER
+#  endif
+#  define USB_MANUFACTURER "Aleck"
+#  define USB_PRODUCT "Pedals"
+#elif USB_VID == 0x9997
+#  undef USB_PRODUCT
+#  if defined(USB_MANUFACTURER)
+#    undef USB_MANUFACTURER
+#  endif
+#  define USB_MANUFACTURER "Aleck"
+#  define USB_PRODUCT "G27_Shifter"
 #elif !defined(USB_MANUFACTURER)
 // Fall through to unknown if no manufacturer name was provided in a macro
 #  define USB_MANUFACTURER "Unknown"
 #endif
 
+const u8 STRING_PRODUCT[] PROGMEM = USB_PRODUCT;
 const u8 STRING_MANUFACTURER[] PROGMEM = USB_MANUFACTURER;
 
 
@@ -443,12 +463,12 @@ static bool USB_SendStringDescriptor(const u8*string_P, u8 string_len, uint8_t f
 //	Does not timeout or cross fifo boundaries
 int USB_RecvControl(void* d, int len)
 {
-	auto length = len;
+	int length = len;
 	while(length)
 	{
 		// Dont receive more than the USB Control EP has to offer
 		// Use fixed 64 because control EP always have 64 bytes even on 16u2.
-		auto recvLength = length;
+		int recvLength = length;
 		if(recvLength > 64){
 			recvLength = 64;
 		}

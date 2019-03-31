@@ -14,7 +14,7 @@ void setup() {
 
 void encoderToButton(char button) {
 	joystick.pressButton(button);
-	delay(50);
+	delay(75);
 	joystick.releaseButton(button);
 }
 
@@ -31,11 +31,13 @@ void loop() {
 	}
 	if (!digitalRead(0)) {
 		joystick.pressButton(1);
+		delay(50);
 	} else {
 		joystick.releaseButton(1);
 	}
 	if (!digitalRead(1)) {
 		joystick.pressButton(0);
+		delay(50);
 	} else {
 		joystick.releaseButton(0);
 	}

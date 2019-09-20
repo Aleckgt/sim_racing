@@ -1,6 +1,9 @@
 Release
+Debug
+build
 spec.d
 .cproject
 .settings
 .project
+.mxproject
 t500rs_wheel_adapter

@@ -67,6 +67,10 @@ void SystemClock_Config(void);
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
+/* Report Data ---------------------------------------------------------------*/
+/* 		0x0d | 0x00, 0x00 | 0x00, 0x00 | 0x00, 0x00
+ * Report_id | throttle   | brake      | clutch
+ */
 uint8_t reportData[7] = {13,};
 volatile uint16_t ADCData[2];
 

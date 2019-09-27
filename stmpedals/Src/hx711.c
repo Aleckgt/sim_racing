@@ -21,9 +21,9 @@ void HX711_Init(HX711 data)
 
 }
 
-int HX711_Average_Value(HX711 data, uint8_t times)
+uint32_t HX711_Average_Value(HX711 data, int times)
 {
-    int sum = 0;
+    uint32_t sum = 0;
     for (int i = 0; i < times; i++)
     {
         sum += HX711_Value(data);
@@ -32,13 +32,13 @@ int HX711_Average_Value(HX711 data, uint8_t times)
     return sum / times;
 }
 
-uint16_t HX711_Value(HX711 data)
+uint32_t HX711_Value(HX711 data)
 {
-    uint16_t buffer;
+    uint32_t buffer;
     buffer = 0;
 
-    //while (HAL_GPIO_ReadPin(data.gpioData, data.pinData)==1)
-    //;
+    while (HAL_GPIO_ReadPin(data.gpioData, data.pinData)==1)
+    ;
 
     for (uint8_t i = 0; i < 24; i++)
     {
@@ -62,13 +62,12 @@ uint16_t HX711_Value(HX711 data)
 
     buffer = buffer ^ 0x800000;
 
-    return buffer;
+    return buffer < data.offset ? 0 : buffer - data.offset;
 }
 
-HX711 HX711_Tare(HX711 data, uint8_t times)
+HX711 HX711_Tare(HX711 data)
 {
-    int sum = HX711_Average_Value(data, times);
-    data.offset = sum;
+	data.offset = HX711_Average_Value(data, 10);
     return data;
 }
 

@@ -9,7 +9,7 @@ typedef struct _hx711
 	GPIO_TypeDef* gpioData;
 	uint16_t pinSck;
 	uint16_t pinData;
-	int offset;
+	uint32_t offset;
 	int gain;
 	// 1: channel A, gain factor 128
 	// 2: channel B, gain factor 32
@@ -18,8 +18,8 @@ typedef struct _hx711
 
 
 void HX711_Init(HX711 data);
-HX711 HX711_Tare(HX711 data, uint8_t times);
-uint16_t HX711_Value(HX711 data);
-int HX711_AverageValue(HX711 data, uint8_t times);
+HX711 HX711_Tare(HX711 data);
+uint32_t HX711_Value(HX711 data);
+int HX711_AverageValue(HX711 data, int times);
 
 #endif /* HX711_H_ */

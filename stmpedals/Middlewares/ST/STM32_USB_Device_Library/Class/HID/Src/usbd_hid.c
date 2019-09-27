@@ -315,26 +315,34 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
   0x00,
 };
 
-__ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE]  __ALIGN_END =
+__ALIGN_BEGIN static uint8_t HID_DEVICE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE]  __ALIGN_END =
 {
 	    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
-	    0x09, 0x04,                    // USAGE (Joystick)
+	    0x09, 0x05,                    // USAGE (Game Pad)
 	    0xa1, 0x01,                    // COLLECTION (Application)
-	    0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
-	    0x09, 0x04,                    //   USAGE (Joystick)
-	    0xa1, 0x02,                    //   COLLECTION (Logical)
+	    0xa1, 0x00,                    //   COLLECTION (Physical)
 	    0x85, 0x0d,                    //     REPORT_ID (13)
-	    0x09, 0x01,                    //     USAGE (Pointer)
-	    0xa1, 0x00,                    //     COLLECTION (Physical)
-	    0x09, 0x33,                    //       USAGE (Rx)
-	    0x09, 0x34,                    //       USAGE (Ry)
-	    0x09, 0x35,                    //       USAGE (Rz)
-	    0x75, 0x10,                    //       REPORT_SIZE (16)
-	    0x95, 0x03,                    //       REPORT_COUNT (3)
-	    0x15, 0x00,                    //       LOGICAL_MINIMUM (0)
-	    0x26, 0xff, 0x0f,              //       LOGICAL_MAXIMUM (4095)
-	    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-	    0xc0,                          //     END_COLLECTION
+	    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+	    0x09, 0x33,                    //     USAGE (Rx)
+	    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+	    0x95, 0x01,                    //     REPORT_COUNT (1)
+	    0x75, 0x10,                    //     REPORT_SIZE (16)
+	    0x26, 0x9c, 0x04,              //     LOGICAL_MAXIMUM (1180)
+	    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+	    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+	    0x09, 0x34,                    //     USAGE (Ry)
+	    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+	    0x27, 0xff, 0xff, 0x00, 0x00,  //     LOGICAL_MAXIMUM (65535)
+	    0x95, 0x01,                    //     REPORT_COUNT (1)
+	    0x75, 0x10,                    //     REPORT_SIZE (16)
+	    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+	    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+	    0x09, 0x35,                    //     USAGE (Rz)
+	    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+	    0x26, 0xb0, 0x04,              //     LOGICAL_MAXIMUM (1100)
+	    0x95, 0x01,                    //     REPORT_COUNT (1)
+	    0x75, 0x10,                    //     REPORT_SIZE (16)
+	    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
 	    0xc0,                          //   END_COLLECTION
 	    0xc0                           // END_COLLECTION
 };
@@ -458,7 +466,7 @@ static uint8_t  USBD_HID_Setup(USBD_HandleTypeDef *pdev,
           if (req->wValue >> 8 == HID_REPORT_DESC)
           {
             len = MIN(HID_DEVICE_REPORT_DESC_SIZE, req->wLength);
-            pbuf = HID_MOUSE_ReportDesc;
+            pbuf = HID_DEVICE_ReportDesc;
           }
           else if (req->wValue >> 8 == HID_DESCRIPTOR_TYPE)
           {

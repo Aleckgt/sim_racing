@@ -144,7 +144,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		hx711_buf = HX711_Value(hx711) / 17;
+		hx711_buf = HX711_Value(hx711) / 25;
 		hx711_val = hx711_buf > 65535 ? 65535 : hx711_buf;
 		hx711_val = hx711_val < 5000 ? 0 : hx711_val;
 
@@ -231,7 +231,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 		reportData[1] = adcData0 & 0xff;
 		reportData[2] = adcData0 >> 8;
 		reportData[5] = adcData1 & 0xff;
-		reportData[6] = adcData1 >> 8;;
+		reportData[6] = adcData1 >> 8;
+
 	}
 }
 

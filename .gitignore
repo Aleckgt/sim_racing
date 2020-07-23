@@ -3,6 +3,7 @@ Debug
 build
 spec.d
 .cproject
+.vscode
 .settings
 .project
 .mxproject

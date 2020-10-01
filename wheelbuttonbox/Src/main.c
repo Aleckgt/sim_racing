@@ -27,7 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "usbd_hid.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,7 +59,8 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+extern USBD_HandleTypeDef hUsbDeviceFS;
+uint8_t reportData[2] = {0, 0};
 /* USER CODE END 0 */
 
 /**
@@ -103,7 +104,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    USBD_HID_SendReport(&hUsbDeviceFS, reportData, 2);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

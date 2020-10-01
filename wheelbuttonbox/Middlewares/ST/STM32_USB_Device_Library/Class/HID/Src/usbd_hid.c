@@ -318,17 +318,18 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
 __ALIGN_BEGIN static uint8_t HID_DEVICE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE]  __ALIGN_END =
 {
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
-    0x09, 0x04,                    // USAGE (Joystick)
+    0x09, 0x05,                    // USAGE (Game Pad)
     0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, 0x0d,                    //     REPORT_ID (13)
-    0x85, 0x01,                    //     REPORT_ID (1)
-    0x75, 0x04,                    //     REPORT_SIZE (4)
+    0xa1, 0x00,                    //   COLLECTION (Physical)
+    0x05, 0x09,                    //     USAGE_PAGE (Button)
     0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
     0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-    0x05, 0x09,                    //     USAGE_PAGE (Button)
-    0x1b, 0x01, 0x00, 0x09, 0x00,  //     USAGE_MINIMUM (Button:Button 1)
-    0x2b, 0x14, 0x00, 0x09, 0x00,  //     USAGE_MAXIMUM (Button:Button 20)
+    0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
+    0x29, 0x14,                    //     USAGE_MAXIMUM (Button 20)
+    0x75, 0x04,                    //     REPORT_SIZE (4)
+    0x95, 0x14,                    //     REPORT_COUNT (20)
     0x81, 0x00,                    //     INPUT (Data,Ary,Abs)
+    0xc0,                          //   END_COLLECTION
     0xc0                           // END_COLLECTION
 };
 
